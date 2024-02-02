@@ -37,7 +37,7 @@ export default class Kanban{
 
     column.tasks.push(task);
     console.log(data);
-    localStorage.setItem("data", JSON.stringify(data));
+    save(data);
     return  task;
   }
 
@@ -46,7 +46,20 @@ export default class Kanban{
   }
 
   static deleteTask(taskId){
+    const data = read();
 
+    for(const column of data){
+      const task = column.tasks.find(item =>{
+        return item.taskId == taskId;
+      });
+      //this function accepts 2 parameters, the index to delete, and how many items to delete
+      column.tasks.splice(column.tasks.indexOf(task), 1);
+    }
+    //THEN UPDATE ALL THINGS IN THE LOCAL STORAGE
+    //This setItem is repeated again and again so we can holt it in one function
+    //Tha function is called save()
+    //localStorage.setItem("data", JSON.stringify(data));
+    save(data);
   }
 
   static getAllTask(){
@@ -66,6 +79,7 @@ function read(){
 
 }
 
-function save(){
+function save(data){
+  localStorage.setItem("data", JSON.stringify(data));
 
 }
