@@ -9,4 +9,13 @@ import Kanban from "./kanban.js";
 
 //Kanban.deleteTask(27272);
 
-console.log(Kanban.getTasks(1));
+//console.log(Kanban.getTasks(1));
+
+// console.log(Kanban.getAllTask());
+
+// Kanban.updateTask(38833, {
+//   columnId:1,
+//   content: "Record JavaScript Preview02"
+// });  
+
+// console.log(Kanban.getAllTask());

@@ -42,6 +42,39 @@ export default class Kanban{
   }
 
   static updateTask(taskId, updatedInformation){
+    const data = read();
+
+    //01.-All this get the information
+    function findColumnTask(){
+      for(const column of data){
+        const task = column.tasks.find(item =>{
+          return item.taskId == taskId;
+        });
+        if(task){
+          return [task, column];
+        }
+      }
+    }
+
+
+    const [task, currentColumn] = findColumnTask();
+    //console.log(task);
+
+    //get the wanted column. Here the updatedInformation is the object updated by the user
+    //So on this we can find the column Id wher we can drag the task
+    const targetColumn = data.find(column =>{
+      return column.columnId == updatedInformation.columnId;
+    });
+
+    //Then, we update the information
+    task.content = updatedInformation.content;
+
+    //For delete a particular task from the current column
+    currentColumn.tasks.splice(currentColumn.tasks.indexOf(task), 1);
+
+    //Then push the updated content task to a new column or wanted column
+    targetColumn.tasks.push(task)
+    save(data);
 
   }
 
