@@ -1,21 +1,36 @@
 import Kanban from "./kanban.js";
 
-//console.log(Kanban.getAllTask());
-//console.log(Kanban.getTasks(1));
+const todo = document.querySelector(".cards.todo");
+const pending = document.querySelector(".cards.pending");
+const completed = document.querySelector(".cards.completed");
 
-//There are two "Edit Kanban Project Lectures" because I save the project two times
-//This show up me the 'return'
-//console.log(Kanban.insertTask(1, "Edit Kanban Project Lectures"));
+const taskbox = [todo, pending, completed];
 
-//Kanban.deleteTask(27272);
+function addTaskCard(task, index){
+  const element = document.createElement("form");
+  element.className = "card";
+  element.draggable = true;
+  element.dataset.id = task.taskId;
+  element.innerHTML = `
+      <input value="${task.content}" type="text" name="task" autocomplete="off"
+      disabled="disabled">
+    <div>
+      <span class="task-id">#${task.taskId}</span>
+      <span>
+        <button class="bi bi-pencil edit" data-id="${task.taskId}"></button>
+        <button class="bi bi-check-lg update hide" data-id="${task.taskId}"></button>
+        <button class="bi bi-trash3 delete" data-id="${task.taskId}"></button>
+      </span>
+    </div>
+`;
 
-//console.log(Kanban.getTasks(1));
+taskbox[index].appendChild(element);
+}
 
-// console.log(Kanban.getAllTask());
+Kanban.getAllTask().forEach((tasks, index) =>{
+  tasks.forEach(task =>{
+    addTaskCard(task, index);
+    
 
-// Kanban.updateTask(38833, {
-//   columnId:1,
-//   content: "Record JavaScript Preview02"
-// });  
-
-// console.log(Kanban.getAllTask());
+  })
+});
