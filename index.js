@@ -37,6 +37,8 @@ Kanban.getAllTask().forEach((tasks, index) =>{
 
 
 
+
+
 //console.log(Kanban.getAllTask());
 //console.log(Kanban.getTasks(1));
 
