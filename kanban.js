@@ -85,8 +85,13 @@ export default class Kanban{
       const task = column.tasks.find(item =>{
         return item.taskId == taskId;
       });
-      //this function accepts 2 parameters, the index to delete, and how many items to delete
-      column.tasks.splice(column.tasks.indexOf(task), 1);
+
+      if (task){
+        //this function accepts 2 parameters, the index to delete, and how many items to delete
+        column.tasks.splice(column.tasks.indexOf(task), 1);
+
+      }
+      
     }
     //THEN UPDATE ALL THINGS IN THE LOCAL STORAGE
     //This setItem is repeated again and again so we can holt it in one function
